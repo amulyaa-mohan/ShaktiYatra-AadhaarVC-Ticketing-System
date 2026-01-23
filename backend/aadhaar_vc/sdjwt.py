@@ -1,4 +1,4 @@
-import io, json, zipfile, base64, hashlib
+import io, zipfile, json, base64, hashlib
 
 def b64url_decode(data: str) -> bytes:
     padding = '=' * (-len(data) % 4)
@@ -17,15 +17,15 @@ def parse_sdjwt_zip(zip_bytes: bytes) -> dict:
     header, payload, _sig = jwt_part.split(".")
 
     payload_json = json.loads(b64url_decode(payload))
-    hashes = payload_json["_sd"]
+    valid_hashes = payload_json["_sd"]
 
     claims = {}
 
-    for d in disclosures:
-        raw = json.loads(b64url_decode(d))
-        salt, name, value = raw
-        canon = json.dumps(raw, separators=(",", ":")).encode()
-        if sha256_b64url(canon) in hashes:
+    for disclosure in disclosures:
+        decoded = json.loads(b64url_decode(disclosure))
+        canon = json.dumps(decoded, separators=(",", ":")).encode()
+        if sha256_b64url(canon) in valid_hashes:
+            _, name, value = decoded
             claims[name] = value
 
     return claims
