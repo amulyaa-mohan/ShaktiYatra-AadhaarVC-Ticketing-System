@@ -1,8 +1,8 @@
 def check_policy(claims: dict) -> bool:
 
-    gender = claims.get("gender", "")
-    address = claims.get("address", "")
-
+    gender = claims.get("Gender")
+    address = claims.get("Address")
+    
     if not isinstance(gender, str):
         return False
 
