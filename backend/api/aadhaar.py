@@ -1,15 +1,21 @@
-from fastapi import APIRouter, UploadFile, File
-from aadhaar_vc.sdjwt import parse_sdjwt_zip
-from aadhaar_vc.policy import check_policy
+from fastapi import APIRouter, UploadFile, File, HTTPException
+
+from backend.aadhaar_vc.sdjwt import parse_sdjwt_zip
+from backend.aadhaar_vc.policy import check_policy
 
 router = APIRouter()
 
-@router.post("/aadhaar/verify")
-async def verify_sdjwt(file: UploadFile = File(...)):
-    zip_bytes = await file.read()
-    claims = parse_sdjwt_zip(zip_bytes)
+@router.post("/verify")
+async def verify_aadhaar(file: UploadFile = File(...)):
+    try:
+        zip_bytes = await file.read()
+        claims = parse_sdjwt_zip(zip_bytes)
+        policy_ok = check_policy(claims)
 
-    return {
-        "claims": claims,
-        "eligible": check_policy(claims)
-    }
+        return {
+            "policy_verified": policy_ok,
+            "claims": claims
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))

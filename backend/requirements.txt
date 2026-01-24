@@ -1,6 +1,7 @@
 fastapi
 uvicorn
-cryptography
-qrcode
-pyjwt
 python-multipart
+pyjwt
+cryptography
+qrcode[pil]
+pillow

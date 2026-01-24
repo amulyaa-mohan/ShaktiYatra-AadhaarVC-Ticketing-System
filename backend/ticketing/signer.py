@@ -1,5 +1,5 @@
 import jwt
-from config import PLATFORM_PRIVATE_KEY
+from backend.config import PLATFORM_PRIVATE_KEY
 
 def sign_ticket(ticket: dict) -> str:
     return jwt.encode(

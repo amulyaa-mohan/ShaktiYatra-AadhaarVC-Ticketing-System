@@ -1,9 +1,9 @@
-from fastapi import APIRouter
-from ticketing.ticket import build_ticket
-from ticketing.signer import sign_ticket
-from ticketing.qr import generate_qr
-from utils import now
-from config import TICKET_EXPIRY_SECONDS
+'''from fastapi import APIRouter
+from backend.ticketing.ticket import build_ticket
+from backend.ticketing.signer import sign_ticket
+from backend.ticketing.qr import generate_qr
+from backend.utils import now
+from backend.config import TICKET_EXPIRY_SECONDS
 
 router = APIRouter()
 
@@ -17,3 +17,11 @@ def issue_ticket(eligible: bool):
     token = sign_ticket(ticket)
     generate_qr(token, "output/generated_qr.png")
     return {"ticket_token": token}
+'''
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.post("/issue")
+def issue_ticket():
+    return {"ticket": "dummy"}

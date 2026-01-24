@@ -1,5 +1,5 @@
 import jwt
-from config import UIDAI_PUBLIC_KEY
+from backend.config import UIDAI_PUBLIC_KEY
 
 def verify_uidai_signature(sdjwt_compact: str):
     token = sdjwt_compact.split("~")[0]
