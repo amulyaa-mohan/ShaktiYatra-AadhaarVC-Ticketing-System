@@ -12,4 +12,5 @@ output/
 # OS
 .DS_Store
 Thumbs.db
+
 backend/keys/platform_private.pem
