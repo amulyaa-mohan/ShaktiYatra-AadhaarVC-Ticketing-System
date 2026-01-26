@@ -1,6 +1,5 @@
 from typing import Dict
 
-
 def check_policy(claims: Dict) -> bool:
 
     if not isinstance(claims, dict):

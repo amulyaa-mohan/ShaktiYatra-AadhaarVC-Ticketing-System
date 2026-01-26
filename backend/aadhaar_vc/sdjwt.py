@@ -22,7 +22,6 @@ def parse_sdjwt_zip(zip_bytes: bytes) -> dict:
 
     parts = sdjwt_raw.split("~")
 
-    # JWT part is parts[0] → ignored in demo mode
     disclosures = parts[1:]
 
     claims = {}

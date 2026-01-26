@@ -1,19 +1,23 @@
-'''from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from backend.ticketing.verifier import verify_ticket
 
-router = APIRouter()
 
-@router.post("/ticket/verify")
-def verify_qr(token: str):
-    decoded = verify_ticket(token)
-    if decoded["policy_verified"]:
-        return {"status": "VERIFIED"}
-    return {"status": "DENIED"}
-'''
-from fastapi import APIRouter
-
-router = APIRouter()
+router = APIRouter(prefix="/gate", tags=["Gate"])
 
 @router.post("/verify")
-def verify_gate():
-    return {"status": "VERIFIED"}
+
+def verify_gate(data: dict):
+    token = data.get("ticket_token")
+
+    if not token:
+        raise HTTPException(status_code=400, detail="Ticket token missing")
+
+    try:
+        payload = verify_ticket(token)
+    except ValueError as e:
+        raise HTTPException(status_code=403, detail=str(e))
+
+    return {
+        "status": "VERIFIED",
+        "ticket": payload
+    }

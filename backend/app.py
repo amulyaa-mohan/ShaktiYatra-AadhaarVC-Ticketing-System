@@ -1,26 +1,33 @@
-'''from fastapi import FastAPI
-from backend.api import aadhaar, ticket, gate
-
-app = FastAPI(title="Aadhaar VC Ticketing Platform")
-
-app.include_router(aadhaar.router, prefix="/aadhaar")
-app.include_router(ticket.router, prefix="/ticket")
-app.include_router(gate.router, prefix="/gate")
-
-@app.get("/")
-def health():
-    return {"status": "running"}
-'''
 from fastapi import FastAPI
-
 from backend.api import aadhaar, ticket, gate
 
-app = FastAPI(title="Aadhaar VC Ticketing Platform")
+tags_metadata = [
+    {
+        "name": "Aadhaar",
+        "description": "Verify Aadhaar VC (SD-JWT) and extract claims"
+    },
+    {
+        "name": "Ticket",
+        "description": "Issue cryptographically signed event tickets"
+    },
+    {
+        "name": "Gate",
+        "description": "Verify ticket QR at entry gate"
+    },
+    {
+        "name": "Health",
+        "description": "Service health check"
+    }
+]
+app = FastAPI(
+    title="Aadhaar VC Ticketing Platform",
+    openapi_tags=tags_metadata
+)
 
-app.include_router(aadhaar.router, prefix="/aadhaar", tags=["Aadhaar"])
-app.include_router(ticket.router, prefix="/ticket", tags=["Ticket"])
-app.include_router(gate.router, prefix="/gate", tags=["Gate"])
+app.include_router(aadhaar.router)
+app.include_router(ticket.router)
+app.include_router(gate.router)
 
-@app.get("/")
+@app.get("/", tags=["Health"])
 def health():
     return {"status": "running"}

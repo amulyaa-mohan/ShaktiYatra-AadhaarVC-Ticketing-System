@@ -1,9 +1,11 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
-
 from backend.aadhaar_vc.sdjwt import parse_sdjwt_zip
 from backend.aadhaar_vc.policy import check_policy
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/aadhaar",
+    tags=["Aadhaar"]
+)
 
 @router.post("/verify")
 async def verify_aadhaar(file: UploadFile = File(...)):
