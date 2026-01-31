@@ -6,7 +6,7 @@ router = APIRouter(
     prefix="/aadhaar",
     tags=["Aadhaar"]
 )
-
+#reading sdjwt.zip files
 @router.post("/verify")
 async def verify_aadhaar(file: UploadFile = File(...)):
     try:

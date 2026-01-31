@@ -19,6 +19,7 @@ tags_metadata = [
         "description": "Service health check"
     }
 ]
+#fastapi connections and integrations
 app = FastAPI(
     title="Aadhaar VC Ticketing Platform",
     openapi_tags=tags_metadata

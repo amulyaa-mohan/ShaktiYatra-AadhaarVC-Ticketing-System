@@ -3,7 +3,7 @@ from backend.ticketing.verifier import verify_ticket
 
 
 router = APIRouter(prefix="/gate", tags=["Gate"])
-
+#verification at gate
 @router.post("/verify")
 
 def verify_gate(data: dict):
