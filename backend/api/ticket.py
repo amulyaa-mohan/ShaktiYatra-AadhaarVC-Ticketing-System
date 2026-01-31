@@ -3,7 +3,7 @@ from backend.ticketing.ticket import create_ticket
 
 router = APIRouter(prefix="/ticket", tags=["Ticket"])
 
-
+#verifing ticket policy and claims
 @router.post("/issue")
 def issue_ticket(data: dict):
     if not data.get("policy_verified"):
