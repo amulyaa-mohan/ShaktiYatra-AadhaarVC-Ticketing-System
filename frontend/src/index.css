@@ -4,6 +4,10 @@
 
 /* Government Blue & White Theme - Shakthi Scheme */
 
+#lovable-badge {                
+  display: none !important;                
+}
+
 @layer base {
   :root {
     --background: 210 50% 98%;
@@ -100,3 +104,5 @@
     @apply bg-background text-foreground;
   }
 }
+
+
