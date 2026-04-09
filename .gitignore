@@ -6,8 +6,13 @@ input/*.zip
 
 output/
 
+.env
+.env.*
+
 backend/keys/*.pem
 !backend/keys/platform_public.pem
+!backend/keys/uidai_public.pem
+
 
 # OS
 .DS_Store
