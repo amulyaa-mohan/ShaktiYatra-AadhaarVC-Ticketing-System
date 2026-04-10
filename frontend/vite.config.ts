@@ -11,7 +11,7 @@ export default defineConfig({
       overlay: false,
     },
   },
-  plugins: [react()], // ✅ cleaned
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
