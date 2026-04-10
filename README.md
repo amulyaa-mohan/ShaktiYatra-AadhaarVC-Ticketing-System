@@ -105,5 +105,8 @@ This system is designed to demonstrate how identity-based verification and valid
 - Offline validation environments (OVSE)
 - Secure access control systems
 
-## Author
-Amulya Mohan
+## Acknowledgement
+
+Thank you for reviewing this project.  
+It represents my exploration of identity systems, security, and scalable architecture for real-world applications.
+by **Amulya Mohan**
